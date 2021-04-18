@@ -1,0 +1,51 @@
+.image-s {
+    max-width: 30%;
+    margin: 0 auto;
+}
+
+.image-m {
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.image-l {
+    max-width: 75%;
+    margin: 0 auto;
+}
+
+.toc-anchor {
+    display: block;
+    height: 74px;
+    margin-top: -74px;
+    visibility: hidden;
+}
+
+a.toc-anchor {
+    display: inline;
+    visibility: visible;
+}
+
+a.toc-anchor::before {
+    content: 'X'
+}
+
+.doc-image {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    max-width: 100%;
+}
+
+.clear {
+    clear: both;
+}
+
+@media (max-width: 1280px) {
+    body.search-menu-open {
+        overflow: hidden;
+    }
+}
+
+.custom-table .MuiTableCell-root {
+    font-size: inherit;
+    line-height: 24px;
+}
