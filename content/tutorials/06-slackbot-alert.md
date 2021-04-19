@@ -5,7 +5,7 @@ metaDescription: "Slack Alerts using using the Pixie API"
 order: 6
 ---
 
-This tutorial will show you how to create a Slackbot to monitor your Kubernetes cluster using data from Pixie's observability platform. This Slackbot reports the number of HTTP errors per service in your cluster. However, the [example code](https://github.com/pixie-labs/pixie/tree/main/demos/slack-alert-app) can be modified to alert based on any data available from Pixie.
+This tutorial will show you how to create a Slackbot to monitor your Kubernetes cluster using data from Pixie's observability platform. This Slackbot reports the number of HTTP errors per service in your cluster. However, the [example code](https://github.com/pixie-labs/pixie-demos/tree/main/slack-alert-app) can be modified to alert based on any data available from Pixie.
 
 ::: div image-l
 <svg title='Slackbot alerting for per service HTTP errors.' src='slackbot/slack-alert.png'/>
@@ -15,33 +15,33 @@ This tutorial will show you how to create a Slackbot to monitor your Kubernetes 
 
 This tutorial assumes:
 
-1. You have a Slack workspace to install your Slack App to. If not, please [create a workspace](https://slack.com/help/articles/206845317-Create-a-Slack-workspace). 
+1. You have a Slack workspace to install your Slack App to. If not, please [create a workspace](https://slack.com/help/articles/206845317-Create-a-Slack-workspace).
 
 2. You have a Kubernetes cluster with Pixie installed. If you don't have a cluster, you can create a minikube test cluster and install Pixie, using our [install guide](/installing-pixie/quick-start).
 
 ## Setup Slack
 
-First, you'll need to create a Slack App, which will allow our application to post messages in a Slack channel. 
+First, you'll need to create a Slack App, which will allow our application to post messages in a Slack channel.
 
 ### Create a Slack app
 
-1. Go to https://api.slack.com/apps and select `Create New App` on the top right. 
+1. Go to https://api.slack.com/apps and select `Create New App` on the top right.
 
 ::: div image-m
 <svg title='Configuring your new Slack app.' src='slackbot/create-app.png'/>
 :::
 
-2. Name your app `Pixie Alerts` and select the workspace to test your app in. 
+2. Name your app `Pixie Alerts` and select the workspace to test your app in.
 
-3. After creating the Pixie Alerts App, you'll be taken to the `Basic Information` page for the app. Under `Add features and functionality`, select `Bots`. 
+3. After creating the Pixie Alerts App, you'll be taken to the `Basic Information` page for the app. Under `Add features and functionality`, select `Bots`.
 
 ::: div image-m
 <svg title='Add Bot functionality to your Pixie Alerts Slack App.' src='slackbot/add-bot-feature.png'/>
 :::
 
-4. On the next page, select the `Review Scopes to Add` button. 
+4. On the next page, select the `Review Scopes to Add` button.
 
-5. On the next page, scroll down to the `Scopes` section, select the `Add an OAuth Scope` button and then the `chat:write` option. 
+5. On the next page, scroll down to the `Scopes` section, select the `Add an OAuth Scope` button and then the `chat:write` option.
 
 The Pixie Alerts App will simply write to a channel, but if you wanted to add support for direct messaging or other functionality, you'll need to increase the bot's scope on this page.
 
@@ -49,7 +49,7 @@ The Pixie Alerts App will simply write to a channel, but if you wanted to add su
 <svg title='Add OAuth scope for `chat:write`.' src='slackbot/add-oauth-scope.png'/>
 :::
 
-6. Scroll up to the top of this page (`OAuth & Permissions`) and select `Install to Workspace` to install the Pixie Alerts App to your workspace.  
+6. Scroll up to the top of this page (`OAuth & Permissions`) and select `Install to Workspace` to install the Pixie Alerts App to your workspace.
 
 ::: div image-m
 <svg title='Install Pixie Alerts App to workspace.' src='slackbot/install-to-workspace.png'/>
@@ -64,7 +64,7 @@ The Pixie Alerts App will simply write to a channel, but if you wanted to add su
 
 ### Create an alerts channel
 
-1. Create a new channel called `#pixie-alerts` for the Pixie Alerts App to post in. If you use a different channel name, you'll need to update the `CHANNEL` variable in `slackbot.py`. 
+1. Create a new channel called `#pixie-alerts` for the Pixie Alerts App to post in. If you use a different channel name, you'll need to update the `CHANNEL` variable in `slackbot.py`.
 
 2. Invite the Pixie Alerts App to the channel, using `/invite @Pixie Alerts`.
 
@@ -74,7 +74,7 @@ The Pixie Alerts App will simply write to a channel, but if you wanted to add su
 
 ## Setup your cluster
 
-1. Use Pixie's CLI to deploy the `px-sock-shop` demo. Our Pixie Alerts App will report HTTP errors for services in the `px-sock-shop` namespace. 
+1. Use Pixie's CLI to deploy the `px-sock-shop` demo. Our Pixie Alerts App will report HTTP errors for services in the `px-sock-shop` namespace.
 
 ```bash
 px demo deploy px-sock-shop
@@ -92,10 +92,10 @@ This tutorial uses example code from Pixie's GitHub repository.
 
 ```bash
 # Clone the Pixie repository.
-git clone https://github.com/pixie-labs/pixie.git
+git clone https://github.com/pixie-labs/pixie-demos.git
 
 # Change to the app directory.
-cd examples/slack-alert-app/<language>
+cd slack-alert-app/<language>
 ```
 
 2. (Python only) Install the dependencies.
@@ -134,11 +134,11 @@ Congrats, your Pixie Alerts App will now post automated alerts to the `#pixie-al
 
 The slackbot can be modified to alert based on any information available from Pixie's observability platform. Some notes:
 
-- We recommend testing your PxL code in the [Live UI](https://work.withpixie.ai/). Once it works, you can replace the `PXL_SCRIPT` string in the slackbot app code. 
+- We recommend testing your PxL code in the [Live UI](https://work.withpixie.ai/). Once it works, you can replace the `PXL_SCRIPT` string in the slackbot app code.
 
-- The example `PXL_SCRIPT` filters for services in the `px-sock-shop` namespace only. Make sure to modify or remove this line to fit your cluster's needs. 
+- The example `PXL_SCRIPT` filters for services in the `px-sock-shop` namespace only. Make sure to modify or remove this line to fit your cluster's needs.
 
-- Make sure that the `start_time` variable in your `PXL_SCRIPT` matches the slack messaging interval to get data for that specific interval only. 
+- Make sure that the `start_time` variable in your `PXL_SCRIPT` matches the slack messaging interval to get data for that specific interval only.
 
 - The table name supplied in the call to `px.display(df, "<table_name>")` needs to match the table name in the slackbot app call to the Pixie API, else you will receive a `ValueError: Table 'table_name' not received` error.
 

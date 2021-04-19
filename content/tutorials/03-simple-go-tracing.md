@@ -32,8 +32,8 @@ execution of you program with minimal overhead.
 2. Clone the `pixie` repo to get the relevant files.
 
 ```bash
-git clone https://github.com/pixie-labs/pixie.git
-cd pixie/demos/simple-gotracing
+git clone https://github.com/pixie-labs/pixie-demos.git
+cd pixie-demos/simple-gotracing
 ```
 
 ## Running the Demo
@@ -85,7 +85,7 @@ func computeE(iterations int64) float64 {
 ```
 
 The function computeE is called by an HTTP handler. Let's say we want to quickly access the arguments to the `computeE`
-function, and it's latency. We can use the provided [capture_args.pxl](https://github.com/pixie-labs/pixie/blob/main/demos/simple-gotracing/capture_args.pxl) 
+function, and it's latency. We can use the provided [capture_args.pxl](https://github.com/pixie-labs/pixie-demos/blob/main/simple-gotracing/capture_args.pxl)
 script. The complete script has code to programmatically insert the log
 and capture data for a time period. However, the actual function that captures this data is straightforward:
 
@@ -98,7 +98,7 @@ def probe_func():
     }]
 ```
 
-This PXL function simply attached to the `main.computeE` function and grabs the iterations argument along with the 
+This PXL function simply attached to the `main.computeE` function and grabs the iterations argument along with the
 execution time in nanoseconds.
 
 To attach this function to our running binary we need to first identify the `UPID` of the process we want to trace. The `UPID` refers to the _unique process id_, which is a process ID that
@@ -171,7 +171,7 @@ Edit the image name in `k8s_manifest.yaml` to correspond to you new image and re
 
 ### Formatting the pxtrace.probe path
 
-The format of the probe path differs slightly depending on whether the function being traced is a standard function or a [receiver method](https://tour.golang.org/methods/8). To create the `pxtrace.probe path` follow these steps: 
+The format of the probe path differs slightly depending on whether the function being traced is a standard function or a [receiver method](https://tour.golang.org/methods/8). To create the `pxtrace.probe path` follow these steps:
 
 1. Get the package path (typically the directory of the file that contains the function) + prefix under GoSrc.
 
@@ -181,7 +181,7 @@ The format of the probe path differs slightly depending on whether the function 
 
 #### Example Probe for a Regular Function
 
-To trace the `encodeError` Go function from [`https://github.com/microservices-demo/payment/blob/master/transport.go`](https://github.com/microservices-demo/payment/blob/master/transport.go#L47), with the following signature: 
+To trace the `encodeError` Go function from [`https://github.com/microservices-demo/payment/blob/master/transport.go`](https://github.com/microservices-demo/payment/blob/master/transport.go#L47), with the following signature:
 
 ```go
 func encodeError(_ context.Context, err error, w http.ResponseWriter) {}
@@ -199,7 +199,7 @@ func encodeError(_ context.Context, err error, w http.ResponseWriter) {}
 
 #### Example Probe for a Struct Function
 
-To trace the `Authorise` receiver method from [`https://github.com/microservices-demo/payment/blob/master/service.go`](https://github.com/microservices-demo/payment/blob/master/service.go#L41), with the following signature: 
+To trace the `Authorise` receiver method from [`https://github.com/microservices-demo/payment/blob/master/service.go`](https://github.com/microservices-demo/payment/blob/master/service.go#L41), with the following signature:
 
 ```go
 func (s *service) Authorise(amount float32) (Authorisation, error) {}
@@ -217,7 +217,7 @@ func (s *service) Authorise(amount float32) (Authorisation, error) {}
 
 ### Debug symbols
 
-Note that Dynamic Go Logging works using debug symbols. By default, go build compiles your program with debug symbols, and is compatible with Dynamic Go Logging. However, if you compile with -ldflags '-w' or strip the debug symbols after compiling, then you will not be able use Dynamic Go Logging. Additionally, if your build is optimized with inlining (-gcflags '-l'), certain functions won't be traceable. For more info see the [golang documentation](https://golang.org/doc/gdb#Introduction). 
+Note that Dynamic Go Logging works using debug symbols. By default, go build compiles your program with debug symbols, and is compatible with Dynamic Go Logging. However, if you compile with -ldflags '-w' or strip the debug symbols after compiling, then you will not be able use Dynamic Go Logging. Additionally, if your build is optimized with inlining (-gcflags '-l'), certain functions won't be traceable. For more info see the [golang documentation](https://golang.org/doc/gdb#Introduction).
 
 ## Known Issues
 
