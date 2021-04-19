@@ -26,5 +26,18 @@ Our vision is to build a product that enables software developers to engineer th
 
 
 ## Roadmap
+Pixie is already deployed in production environments at internet scale companies. Our goal over the next two years is to expand the current capabilities of the product: data collection, data import/export and edge AI. We are also working on hardening and performance improvements for very large Kubernetes clusters. 
 
-In lieu of our move to [open source Pixie](https://blog.pixielabs.ai/pixie-new-relic/), we will be publishing an updated roadmap soon.
+Internally Pixie is composed of many different sub-components: data collection, data processing, cloud, and the CLI. We plan to publish a roadmap for each of these components by mid May. The roadmap is a tentative plan that drives feature work for the Pixie project. This plan is subject to revision and change as a result of changing priorities. 
+
+### Expand Data Collection
+Pixie currently provides rich, instant out-of-the-box visibility with basic metrics, infrastructure, and network traffic. We plan to expand our data collection to other forms of data, such as logs, full traces, and custom metrics. We also plan to improve for vm based & dynamic languages, including Java and interpreted languages such as Ruby and Python.
+
+### Improve Kubernetes Support
+Pixie currently supports integration with basic Kubernetes resources, such as namespaces, services, and pods. We aim to expand this to other Kubernetes resources, including events. 
+
+### Expand Edge ML/AI
+Pixie’s edge compute engine allows us to apply ML/AI on unsampled data. We will expand on our applications of edge ML/AI, including detection of anomalous/interesting data, data compression, and more. 
+
+### Support the ecosystem
+Pixie has a versatile execution engine which can ingest and export data in a variety of formats. We plan to export and ingest data in the OpenTelemetry format which will enable developers to consume Pixie data in other tools (Jaeger, Prometheus) and use the Pixie to explore data from other sources, respectively. This work includes providing a Pixie API to enable API integrations, such as a Grafana plugin.
