@@ -35,6 +35,8 @@ interface PageItemProps {
   children: ReactElement[],
   location: any,
   classes: any,
+  lang: string,
+  globalUrlTree: any[]
 }
 
 const Layout = withStyles((theme: Theme) => ({
@@ -57,7 +59,7 @@ const Layout = withStyles((theme: Theme) => ({
     flexGrow: 1,
   },
 }))(({
-  children, location, classes,
+  children, location, classes, lang, globalUrlTree,
 }: PageItemProps) => {
   const { site } = useStaticQuery(
     graphql`
@@ -144,12 +146,19 @@ const Layout = withStyles((theme: Theme) => ({
                   paper: classes.drawerPaper,
                 }}
               >
-                <Sidebar location={location} artifactName='vizier' />
+                <Sidebar
+                  location={location}
+                  artifactName='vizier'
+                  lang={lang}
+                  globalUrlTree={globalUrlTree}
+                />
               </Drawer>
             )}
             {sidebarOpen && !needsFloat && (
               <Sidebar
                 location={location}
+                lang={lang}
+                globalUrlTree={globalUrlTree}
                 className={classes.drawer}
                 artifactName='vizier'
               />

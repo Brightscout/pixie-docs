@@ -72,7 +72,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const MDXDocsRender = ((props: any) => {
   const classes = useStyles();
-  const { data } = props;
+  const { data, pageContext } = props;
+  // eslint-disable-next-line react/destructuring-assignment
+  // console.log(pageContext.availableLanguages);
   const { allMdx, mdx } = data;
   const nav = allMdx.edges.map((edge) => ({
     title: edge.node.fields.title,
@@ -84,7 +86,7 @@ const MDXDocsRender = ((props: any) => {
   const needToc = tableOfContents.length > 0;
 
   return (
-    <Layout {...props}>
+    <Layout {...props} lang={pageContext.lang} globalUrlTree={pageContext.globalUrlTree}>
       <SEO
         title={mdx.frontmatter.metaTitle}
         description={mdx.frontmatter.metaDescription}
@@ -155,6 +157,7 @@ export const pageQuery = graphql`
                         title
                         level
                         id
+                        lang
                     }
                 }
             }

@@ -1,18 +1,29 @@
-# [docs.pixielabs.ai](http://docs.pixielabs.ai/) &middot; [![Netlify Status](https://api.netlify.com/api/v1/badges/e79c5a8a-187a-43ef-a133-492e099a0f5f/deploy-status)](https://app.netlify.com/sites/pixie-docs/deploys) <a href="https://twitter.com/intent/follow?screen_name=pixie_run"><img src="https://img.shields.io/twitter/follow/pixie_run.svg?label=Follow%20@pixie_run" alt="Follow @pixie_run" /></a>
+# Pixie Customer Docs
 
-This repo contains the source code and content for the [Pixie Docs](http://docs.pixielabs.ai/) website.
+The documentation site for [Pixie](https://github.com/pixie-labs/pixie), hosted at [docs.pixielabs.ai](https://docs.pixielabs.ai).
 
-## Reporting Issues
+Built with [Gatsby](https://www.gatsbyjs.com/).
 
-Submit any issues or enhancement requests by [filing an issue](https://github.com/pixie-labs/pixie-docs/issues/new). Please search for and review the existing open issues before submitting a new issue.
+For the main website code, see [`pixielabs-website`](https://github.com/pixie-labs/pixielabs-website).
 
 ## Contributing
+We're excited to have you contribute to Pixie's documentation.
+Our community has adopted the [Contributor Covenant](https://github.com/pixie-labs/pixie/blob/main/CODE_OF_CONDUCT.md) as its code of conduct, and we expect all participants to adhere to it.
+Please report any violations to <community@pixielabs.ai>.
+All code contributions require the [Contributor License Agreement](https://github.com/pixie-labs/pixie/blob/main/CLA.md).
+The CLA can be signed when creating your first PR.
 
-We're excited to have you contribute to Pixie's documentation!
+There are many other ways to contribute to Pixie, as well:
 
-Pixie has adopted the [Contributor Covenant](https://github.com/pixie-labs/pixie-docs/blob/main/CODE_OF_CONDUCT.md) as its code of conduct, and we expect all participants to adhere to it. Please report any violations to <community@pixielabs.ai>. All code contributions require the [Contributor License Agreement](https://github.com/pixie-labs/pixie-docs/blob/main/CLA.md). The CLA can be signed when creating your first PR.
+- **Bugs:** Something not working as expected? [Send a bug report](https://github.com/pixie-labs/pixie/issues/new?template=Bug_report.md).
+- **Features:** Need new Pixie capabilities? [Send a feature request](https://github.com/pixie-labs/pixie/issues/new?template=Feature_request.md).
+- **Views & Scripts Requests:** Need help building a live view or pxl scripts? [Send a live view request](https://github.com/pixie-labs/pixie/issues/new?template=Live_view_request.md).
+- **PxL Scripts:** PxL scripts are used by Pixie's API to query telemetry data collected by the Pixie Platform (DNS events, HTTP events, etc) and to extend the platform to collect new data sources.
+  PxL can be executed using the web based Live UI, CLI or API. Look [here](https://github.com/pixie-labs/pixie/blob/main/pxl_scripts/README.md#Contributing) for more information.
+- **Pixienaut Community:** Interested in becoming a [Pixienaut](https://github.com/pixie-labs/pixie/tree/master/pixienauts) and in helping shape our community? [Apply here](https://pixielabs.ai/community/).
+- **Community Slack:** Pixie users can also chat with one another in our [community Slack](https://pixie-community.slack.com).
 
-### Dev Setup
+## 🚀 Quickstart for contributors
 
 To run in development mode, run the following commands:
 ```shell
@@ -27,24 +38,41 @@ yarn install
 yarn build
 ```
 
-### Updating Automated Content
-To pull the latest reference docs, run:
+## Updating content
+To pull updated content, run:
 ```shell
 ./update_docs.sh
 ```
 This will overwrite `external/pxl_documentation.json`.
-Add the changed file to the repo and submit a pull request.
+Add the changed file to the repo, and submit a pull request.
 
-### Deploy Previews
+## Notes
+- For nesting documents in the left sidebar, create a folder with the same name as the top level `.md` filename.
+  Nested navigation is generated automatically, and is alphabetically ordered.
+  At this time, only one level of nesting is supported.
 
-Once you submit a pull request to this repo, Netlify creates a [deploy preview](https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/) for the changes in the specific PR. You can view the deploy preview in the Netlify panel that appears under the PR description.
+## Live Code Editor
 
-### Publishing the Site
+To render react components for live editing in Markdown content, add `react-live=true` after a code block's language specifier. For example:
+````markdown
+```javascript react-live=true
+<button>Edit my text</button>
+```
+````
+This is achieved using the [`react-live` package](https://www.npmjs.com/package/react-live).
 
-The Pixie website is published automatically by [Netlify](https://www.netlify.com/). Whenever changes are merged into the `prod` branch, Netlify re-builds and re-deploys the site.
+## 🤖 SEO friendly
 
-## Documentation License
+This is a static site and comes with all the SEO benefits thereof.
+Using [MDX Frontmatter](https://www.gatsbyjs.com/docs/mdx/writing-pages/), you can set search-engine-friendly metadata for each page.
 
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+A basic page might set its title, as well as the title and description that search engines see, by placing this at the top of its file:
+```markdown
+---
+title: "Title of the page"
+metaTitle: "Meta Title Tag for this page"
+metaDescription: "Meta Description Tag for this page"
+---
+```
 
-Please note the Creative Commons Attribution 4.0 license applies to the creative work of this site (documentation, visual assets, etc.) and not to the underlying code and does not supersede any licenses of the source code, its dependencies, etc.
+Canonical URLs are generated automatically.
