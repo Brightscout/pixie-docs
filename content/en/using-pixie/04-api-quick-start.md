@@ -30,7 +30,8 @@ In the terminal, run:
 # Create Pixie api-key.
 px api-key create
 ```
-Save the output value labeled `Key`, we'll use it shortly. 
+
+Save the output value labeled `Key`, we'll use it shortly.
 
 ::: div image-l
 <svg title='CLI output for `px api-key create` command.' src='api/cli-create-key.png'/>
@@ -38,13 +39,13 @@ Save the output value labeled `Key`, we'll use it shortly.
 
 #### Using the Live UI
 
-1. Login to Pixie's [admin page](http://work.withpixie.ai/admin). 
+1. Login to Pixie's [admin page](http://work.withpixie.ai/admin).
 
 2. Navigate to the `API Keys` tab along the top of the page.
 
-3. Select the `+ New Key` button in the top-right corner. This will create a new key at the top of the API Keys table. 
+3. Select the `+ New Key` button in the top-right corner. This will create a new key at the top of the API Keys table.
 
-4. In the `Actions` column, select the 3-dot menu, then the `Copy value` menu item. 
+4. In the `Actions` column, select the 3-dot menu, then the `Copy value` menu item.
 
 <svg title='API Key interface in the Live UI Admin page.' src='api/live-ui-create-key.png'/>
 
@@ -60,15 +61,16 @@ In the terminal, run:
 # display cluster IDs for all clusters with Pixie installed
 px get viziers
 ```
-Select the cluster you want to query using the API, and save its `ID`. We'll use this value shortly. 
+
+Select the cluster you want to query using the API, and save its `ID`. We'll use this value shortly.
 
 <svg title='CLI output for `px get viziers` command.' src='api/cli-cluster-id.png'/>
 
 #### Using the Live UI
 
-1. Log in to Pixie's [admin page](http://work.withpixie.ai/admin). 
+1. Log in to Pixie's [admin page](http://work.withpixie.ai/admin).
 
-2. On the Clusters tab, hover over the `ID` column value next to your cluster's name to display the full 36-character string. 
+2. On the Clusters tab, hover over the `ID` column value next to your cluster's name to display the full 36-character string.
 
 <svg title='Cluster table in the Live UI Admin page.' src='api/live-ui-cluster-id.png'/>
 
@@ -78,16 +80,18 @@ Select the cluster you want to query using the API, and save its `ID`. We'll use
 # Requires Python 3.8.7+
 pip install pxapi
 ```
+
 ```go
 // We recommend using a Go modules project: https://blog.golang.org/using-go-modules
-go get go.withpixie.dev/pixie
+go get px.dev/pxapi
 ```
 
 ## Import the library
 
 ```python
-import pxapi 
+import pxapi
 ```
+
 ```go
 // Import pixie go package and subpackages.
 import (
@@ -96,14 +100,15 @@ import (
 	"io"
 	"os"
 
-	"go.withpixie.dev/pixie/src/api/go/pxapi"
-	"go.withpixie.dev/pixie/src/api/go/pxapi/types"
+	"px.dev/pxapi/src/api/go/pxapi"
+	"px.dev/pixie/src/api/go/pxapi/errdefs"
+	"px.dev/pxapi/src/api/go/pxapi/types"
 )
 ```
 
 ## Initialize a Pixie client and connect to a cluster
 
-You'll need the API Key and Cluster ID created in the [Setup](/using-pixie/api-quick-start/#setup) section. 
+You'll need the API Key and Cluster ID created in the [Setup](/using-pixie/api-quick-start/#setup) section.
 
 ```python
 # Create a Pixie client.
@@ -112,6 +117,7 @@ px_client = pxapi.Client(token=<YOUR_API_TOKEN_STRING>)
 # Connect to cluster.
 conn = px_client.connect_to_cluster(<YOUR_CLUSTER_ID_STRING>)
 ```
+
 ```go
 // Create a Pixie client.
 ctx := context.Background()
@@ -149,6 +155,7 @@ script = conn.prepare_script(PXL_SCRIPT)
 for row in script.results("http_table"):
     print(row["http_resp_status"], row["http_req_path"])
 ```
+
 ```go
 // Define a PxL script with out output table.
 pxl := `
@@ -204,19 +211,19 @@ func (s *tableMux) AcceptTable(ctx context.Context, metadata types.TableMetadata
 
 This PxL query returns two columns from the first 10 rows of the `http_events` table of data. For more information on how this PxL script was written, check out the [PxL script tutorial](https://docs.pixielabs.ai/tutorials/pxl-scripts/pxl-scripts-1/).
 
-Note that the API does not currently support running our open source `px/` scripts by name. If you would like to run one of the `px/` scripts that we include in the CLI or Live UI, you will need to copy the PxL script and pass it in as a string. Only PxL scripts with an empty Vis Spec will return results from the API. 
+Note that the API does not currently support running our open source `px/` scripts by name. If you would like to run one of the `px/` scripts that we include in the CLI or Live UI, you will need to copy the PxL script and pass it in as a string. Only PxL scripts with an empty Vis Spec will return results from the API.
 
-If your PxL query has any compile errors, you will get a `pixie.errors.PxLError`. We recommend writing and debugging your PxL scripts using our [Live UI](/using-pixie/using-live-ui), [CLI](/using-pixie/using-cli) tool. 
+If your PxL query has any compile errors, you will get a `pixie.errors.PxLError`. We recommend writing and debugging your PxL scripts using our [Live UI](/using-pixie/using-live-ui), [CLI](/using-pixie/using-cli) tool.
 
 ## Complete example source code
 
-Below is the complete source code for the example above. 
+Below is the complete source code for the example above.
 
 This basic example along with more advanced API examples can be found in the [API folder](https://github.com/pixie-labs/pixie/tree/main/src/api) in Pixie's GitHub repo.
 
 ```python
 # Import Pixie's python API.
-import pxapi 
+import pxapi
 
 # Define a PxL query with one output table.
 PXL_SCRIPT = """
@@ -239,6 +246,7 @@ script = conn.prepare_script(PXL_SCRIPT)
 for row in script.results("http_table"):
     print(row["http_resp_status"], row["http_req_path"])
 ```
+
 ```go
 package main
 
@@ -248,8 +256,9 @@ import (
 	"io"
 	"os"
 
-	"pixielabs.ai/pixielabs/src/api/go/pxapi"
-	"pixielabs.ai/pixielabs/src/api/go/pxapi/types"
+	"px.dev/pxapi/src/api/go/pxapi"
+	"px.dev/pixie/src/api/go/pxapi/errdefs"
+	"px.dev/pxapi/src/api/go/pxapi/types"
 )
 
 // Define PxL script with one table output.
