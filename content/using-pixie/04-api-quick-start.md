@@ -256,9 +256,9 @@ import (
 	"io"
 	"os"
 
-	"px.dev/pxapi/src/api/go/pxapi"
-	"px.dev/pixie/src/api/go/pxapi/errdefs"
-	"px.dev/pxapi/src/api/go/pxapi/types"
+	"px.dev/pxapi"
+	"px.dev/pxapi/errdefs"
+	"px.dev/pxapi/types"
 )
 
 // Define PxL script with one table output.
