@@ -299,7 +299,11 @@ func main() {
 	// Receive the PxL script results.
 	defer resultSet.Close()
 	if err := resultSet.Stream(); err != nil {
-		fmt.Printf("Got error : %+v, while streaming\n", err)
+		if errdefs.IsCompilationError(err) {
+			fmt.Printf("Got compiler error: \n %s\n", err.Error())
+		} else {
+			fmt.Printf("Got error : %+v, while streaming\n", err)
+		}
 	}
 
 	// Get the execution stats for the script execution.
