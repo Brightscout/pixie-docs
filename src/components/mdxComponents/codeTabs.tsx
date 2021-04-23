@@ -149,7 +149,7 @@ const CodeTabs = withStyles((theme) => ({
   const actualDifferentChoices = possibleChoices
     .filter((item, pos) => possibleChoices.indexOf(item) === pos);
 
-  if (actualDifferentChoices.length == 1) {
+  if (actualDifferentChoices.length === 1) {
     return possibleChoices.map((c, idx) => (
       <div
         key={_children[idx]}
