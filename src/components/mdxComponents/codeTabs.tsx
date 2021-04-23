@@ -76,7 +76,10 @@ const CodeTabs = withStyles((theme) => ({
   },
 
 }))((props: any) => {
-  const { children, classes } = props;
+  const {
+    children,
+    classes,
+  } = props;
   const tabCtx = useContext(TabSwitcherProviderContext);
 
   // eslint-disable-next-line no-underscore-dangle
@@ -88,7 +91,10 @@ const CodeTabs = withStyles((theme) => ({
   }
 
   _children.sort((a, b) => {
-    function makeKey({ language, title }) {
+    function makeKey({
+      language,
+      title,
+    }) {
       return `${language || '_'}-${title || ''}`;
     }
 
@@ -105,7 +111,10 @@ const CodeTabs = withStyles((theme) => ({
   };
 
   let possibleChoices = _children.map((x) => {
-    const { title, language } = x.props;
+    const {
+      title,
+      language,
+    } = x.props;
     return (
       title
       || LANGUAGES[language]
@@ -124,6 +133,7 @@ const CodeTabs = withStyles((theme) => ({
     }
     return arr;
   }, []);
+
   const localSelectionChoice = localSelection
     ? possibleChoices.find((x) => x === localSelection)
     : null;
@@ -135,6 +145,20 @@ const CodeTabs = withStyles((theme) => ({
     setLocalSelection(finalSelection);
   }
   let code = null;
+
+  const actualDifferentChoices = possibleChoices
+    .filter((item, pos) => possibleChoices.indexOf(item) === pos);
+
+  if (actualDifferentChoices.length == 1) {
+    return possibleChoices.map((c, idx) => (
+      <div
+        key={_children[idx]}
+        className='tab-content'
+      >
+        {_children[idx]}
+      </div>
+    ));
+  }
 
   const names = possibleChoices.map((choice, idx) => {
     if (choice === finalSelection) {
