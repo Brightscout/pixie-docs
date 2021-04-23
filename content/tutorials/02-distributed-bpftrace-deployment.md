@@ -23,7 +23,6 @@ Now, using Pixie, developers can dynamically run their own bpftrace programs on 
 - making the data available to be queried and visualized in the Pixie UI.
 - removing the probe(s) after a set expiration time.
 
-
 ### Output
 
 bpftrace programs output data through a variety of built-in functions. Examples include `printf` for general purpose printing, `print` for printing map contents, and `time` for printing the current time. bpftrace also automatically prints all maps on termination, which many bpftrace programs rely on.
@@ -54,7 +53,8 @@ In this demo, we'll deploy Dale Hamel's bpftrace [TCP retransmit tool](https://g
 
 ### Running the PxL Script in the Live UI
 
-We've incorporated this trace into a PxL script called [`px/tcp_retransmits`](https://github.com/pixie-labs/pixie/tree/main/pxl_scripts/px/tcp_retransmits). To run this script:
+We've incorporated this trace into a PxL script called [`px/tcp_retransmits`](https://github.com/pixie-labs/pixie/tree/main/src/pxl_scripts/px/tcp_retransmits). To run this script:
+
 - Open up Pixie's [Live View](https://work.withpixie.ai) and select your cluster.
 - Select the `px/tcp_retransmits` script using the drop down `script` menu or with Pixie Command. Pixie Command can be opened with the `ctrl/cmd+k` keyboard shortcut.
 - Run the script using the Run button in the top right, or with the `ctrl/cmd+enter` keyboard shortcut.
@@ -155,6 +155,7 @@ On line 8, we've included Dale Hamel's [tcpretrans.bt](https://github.com/ioviso
 Some further modifications were made to simplify the program for the purposes of this tutorial (for example, removing the TCP state), but those are not required changes.
 
 On line 50, we call `UpsertTracepoint` with the following arguments:
+
 - the name of the tracepoint
 - the name of the table to push data into
 - the type of the trace probe
@@ -194,4 +195,4 @@ Based on a quick visual inspection of the code, the following programs should th
 - `oomkill.bt`
 - `writeback.bt`
 
-If you have any questions about this feature or how to incorporate your own bpftrace code, we'd be happy to help out over on our [Slack](https://slackin.withpixie.ai/). 
+If you have any questions about this feature or how to incorporate your own bpftrace code, we'd be happy to help out over on our [Slack](https://slackin.withpixie.ai/).
