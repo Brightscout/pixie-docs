@@ -59,9 +59,9 @@ const Sidebar = withStyles((theme: Theme) => ({
   main: {
     backgroundColor: theme.palette.background.default,
     borderRight: theme.palette.type === 'light' ? '1px solid #DBDDE0' : '1px solid #353738',
-    minWidth: '300px',
+    minWidth: '260px',
     boxSizing: 'border-box',
-    minHeight: 'calc(100vh - 74px)',
+    maxHeight: 'calc(100vh - 54px)',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',

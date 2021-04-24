@@ -55,6 +55,8 @@ const Layout = withStyles((theme: Theme) => ({
   content: {
     width: '100%',
     flexGrow: 1,
+    maxHeight: 'calc(100vh - 54px)',
+    overflow: 'auto',
   },
 }))(({
   children, location, classes,
