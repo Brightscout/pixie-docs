@@ -75,6 +75,28 @@ const useStyles = makeStyles((theme) => ({
     width: '189px',
     borderRadius: '7px',
   },
+  langMenu: {
+    position: 'absolute',
+    top: `calc(${theme.overrides.MuiToolbar.root.minHeight} / 2 - 4px)`,
+    boxShadow: theme.palette.type === 'light' ? '0px 15px 130px 0px rgba(0,0,0,0.10)' : '0px 15px 130px 0px rgba(0,0,0,0.45)',
+    right: 0,
+    zIndex: 1,
+    backgroundColor: theme.palette.type === 'light' ? '#212324' : '#212324',
+    borderRadius: '7px',
+  },
+  langMenuItem: {
+    color: theme.palette.type === 'light' ? '#B2B5BB' : '#B2B5BB',
+    fontSize: '14px',
+    lineHeight: '24px',
+    padding: '14px',
+    textAlign: 'center',
+    width: '52px',
+    '& a': {
+      textDecoration: 'none',
+      fontStyle: 'inherit',
+      color: 'inherit',
+    },
+  },
   dropMenuItem: {
     color: theme.palette.type === 'light' ? '#B2B5BB' : '#B2B5BB',
     fontSize: '14px',
@@ -100,6 +122,8 @@ const useStyles = makeStyles((theme) => ({
 
 interface Props {
   location: string,
+  availableLanguages: { lang: string, slug: string }[],
+  lang: string,
   theme: string,
   onThemeTypeSwitch: any
   setDrawerOpen: any,
@@ -117,7 +141,10 @@ interface RenderProps {
 }
 
 const Header = ({
-  drawerOpen, setDrawerOpen,
+  drawerOpen,
+  setDrawerOpen,
+  availableLanguages,
+  lang = 'en',
   setSidebarOpen,
   sidebarOpen,
   onThemeTypeSwitch,
@@ -129,6 +156,7 @@ const Header = ({
   };
 
   const [openSupportMenu, setOpenSupportMenu] = React.useState(false);
+  const [openLanguageMenu, setOpenLanguageMenu] = React.useState(false);
 
   const classes = useStyles();
 
@@ -174,7 +202,16 @@ const Header = ({
                 </IconButton>
                 <Hidden smDown implementation='css'>
                   <ClickAwayListener onClickAway={() => setOpenSupportMenu(false)}>
-                    <Button className={classes.menuItem} color='default' size='inherit' aria-controls='support-menu' aria-haspopup='true' onClick={() => setOpenSupportMenu((prev) => !prev)}>Support</Button>
+                    <Button
+                      className={classes.menuItem}
+                      color='default'
+                      size='inherit'
+                      aria-controls='support-menu'
+                      aria-haspopup='true'
+                      onClick={() => setOpenSupportMenu((prev) => !prev)}
+                    >
+                      Support
+                    </Button>
                   </ClickAwayListener>
                   <div className={classes.dropMenuRef}>
                     {openSupportMenu ? (
@@ -217,9 +254,49 @@ const Header = ({
                     ) : null}
                   </div>
                 </Hidden>
+                <Hidden smDown implementation='css'>
+                  <ClickAwayListener onClickAway={() => setOpenLanguageMenu(false)}>
+                    <Button
+                      className={classes.menuItem}
+                      color='default'
+                      size='inherit'
+                      aria-controls='support-menu'
+                      aria-haspopup='true'
+                      onClick={() => setOpenLanguageMenu((prev) => !prev)}
+                    >
+                      {lang}
+                    </Button>
+                  </ClickAwayListener>
+                  <div className={classes.dropMenuRef}>
+                    {openLanguageMenu ? (
+                      <div className={classes.langMenu}>
+                        {availableLanguages.map((l) => (
+                          <div
+                            key={l.lang}
+                            className={classes.langMenuItem}
+                            onClick={() => setOpenSupportMenu(false)}
+                          >
+                            <Link
+                              to={l.slug}
+                              target='_blank'
+                              rel='noopener noreferrer'
+                            >
+                              {l.lang}
+                            </Link>
+                          </div>
+                        ))}
+
+                      </div>
+                    ) : null}
+                  </div>
+                </Hidden>
                 <SearchResultsDropdown />
                 <Hidden mdDown implementation='css'>
-                  <Button href={getReferrer()} size='small' color='secondary' variant='contained'>Back to Pixie</Button>
+                  <Button href={getReferrer()} size='small' color='secondary' variant='contained'>
+                    Back
+                    to
+                    Pixie
+                  </Button>
                 </Hidden>
               </div>
             </Toolbar>

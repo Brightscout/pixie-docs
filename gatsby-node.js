@@ -6,7 +6,7 @@ const utils = require('./src/functionPageUrl.ts');
 const jsonDocumentation = require('./external/pxl_documentation.json');
 
 const globalUrlTree = [];
-const languages = ['de'];
+const languages = require('./available-languages');
 
 const removeLanguageFromUrl = (url) => {
   const slugTree = url.split('/')

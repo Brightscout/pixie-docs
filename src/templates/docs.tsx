@@ -72,10 +72,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const MDXDocsRender = ((props: any) => {
   const classes = useStyles();
-  const { data, pageContext } = props;
+  const {
+    data,
+    pageContext,
+  } = props;
   // eslint-disable-next-line react/destructuring-assignment
-  // console.log(pageContext.availableLanguages);
-  const { allMdx, mdx } = data;
+  const { availableLanguages, lang } = pageContext;
+  const {
+    allMdx,
+    mdx,
+  } = data;
   const nav = allMdx.edges.map((edge) => ({
     title: edge.node.fields.title,
     url: edge.node.fields.slug,
@@ -86,14 +92,21 @@ const MDXDocsRender = ((props: any) => {
   const needToc = tableOfContents.length > 0;
 
   return (
-    <Layout {...props} lang={pageContext.lang} globalUrlTree={pageContext.globalUrlTree}>
+    <Layout
+      {...props}
+      lang={lang}
+      globalUrlTree={pageContext.globalUrlTree}
+      availableLanguages={availableLanguages}
+    >
       <SEO
         title={mdx.frontmatter.metaTitle}
         description={mdx.frontmatter.metaDescription}
       />
       <MDXProvider components={mdxComponents}>
         <div className={classes.mainContainer}>
-          <div className={`${needToc ? classes.allowToc : classes.fullWidth} ${classes.mainRenderer} DocSearch-content`}>
+          <div
+            className={`${needToc ? classes.allowToc : classes.fullWidth} ${classes.mainRenderer} DocSearch-content`}
+          >
             <div>
               <HLink id='title' variant='h1'>
                 {mdx.fields.title}
