@@ -11,7 +11,7 @@ const languages = require('./available-languages');
 const removeLanguageFromUrl = (url) => {
   const slugTree = url.split('/')
     .filter((n) => n);
-  if (languages.some((l) => l === slugTree[0])) {
+  if (languages.some((l) => l.id === slugTree[0])) {
     slugTree.shift();
   }
   return slugTree.join('/');
@@ -242,7 +242,7 @@ exports.onCreateNode = ({
       treePath.shift();
     }
 
-    const level = treePath.filter((l) => l !== 'index' && !languages.some((ll) => ll === l)).length;
+    const level = treePath.filter((l) => l !== 'index' && !languages.some((ll) => ll.id === l)).length;
     // console.log(treePath, level);
 
     const title = node.frontmatter.title || startCase(parent.name);

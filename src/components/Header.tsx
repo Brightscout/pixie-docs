@@ -32,6 +32,7 @@ import logoImg from '../images/pixie-logo-header.svg';
 import slackIcon from './images/slack-icon.svg';
 import mailIcon from './images/mail-icon.svg';
 import SearchResultsDropdown from './search-results-dropdown';
+import languages from '../../available-languages';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -61,6 +62,15 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     position: 'relative',
   },
+  dropIcon: {
+    '&:after': {
+      content: '"▼"',
+      display: 'inline-block',
+      fontSize: '7px',
+      paddingLeft: '8px',
+      verticalAlign: 'middle',
+    },
+  },
   dropMenuRef: {
     position: 'relative',
     display: 'inline-block',
@@ -83,6 +93,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1,
     backgroundColor: theme.palette.type === 'light' ? '#212324' : '#212324',
     borderRadius: '7px',
+
   },
   langMenuItem: {
     color: theme.palette.type === 'light' ? '#B2B5BB' : '#B2B5BB',
@@ -93,6 +104,9 @@ const useStyles = makeStyles((theme) => ({
     width: '52px',
     '& a': {
       textDecoration: 'none',
+      display: 'block',
+      margin: '-14px',
+      padding: '14px',
       fontStyle: 'inherit',
       color: 'inherit',
     },
@@ -112,6 +126,9 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: 'none',
       fontStyle: 'inherit',
       color: 'inherit',
+      padding: '14px',
+      margin: '-14px',
+      display: 'block',
     },
   },
   menuItem: {
@@ -159,7 +176,10 @@ const Header = ({
   const [openLanguageMenu, setOpenLanguageMenu] = React.useState(false);
 
   const classes = useStyles();
-
+  const getLanguageLabel = (languageId) => {
+    console.log(languageId);
+    return (languageId === 'en' ? 'English' : languages.find((l) => l.id === languageId).label);
+  };
   const getReferrer = () => {
     if (typeof window === 'undefined') return 'https://pixielabs.ai';
     const ref = sessionStorage.getItem('referrer');
@@ -211,6 +231,7 @@ const Header = ({
                       onClick={() => setOpenSupportMenu((prev) => !prev)}
                     >
                       Support
+                      <span className={classes.dropIcon} />
                     </Button>
                   </ClickAwayListener>
                   <div className={classes.dropMenuRef}>
@@ -264,7 +285,8 @@ const Header = ({
                       aria-haspopup='true'
                       onClick={() => setOpenLanguageMenu((prev) => !prev)}
                     >
-                      {lang}
+                      {getLanguageLabel(lang)}
+                      <span className={classes.dropIcon} />
                     </Button>
                   </ClickAwayListener>
                   <div className={classes.dropMenuRef}>
@@ -281,7 +303,7 @@ const Header = ({
                               target='_blank'
                               rel='noopener noreferrer'
                             >
-                              {l.lang}
+                              {getLanguageLabel(l.lang)}
                             </Link>
                           </div>
                         ))}

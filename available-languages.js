@@ -1,3 +1,6 @@
-const languages = ['de'];
+const languages = [{
+  id: 'de',
+  label: 'Deutsch',
+}];
 
 module.exports = languages;
