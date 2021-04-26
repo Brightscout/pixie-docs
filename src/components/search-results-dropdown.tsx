@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginRight: 0,
       fontFamily: 'Roboto',
       paddingLeft: '16px',
+      fontSize: '16px',
       color: '#ffffff',
       '&::placeholder': {
         fontFamily: 'Roboto',
@@ -117,6 +118,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     boxShadow: '0px 4px 8px 0px rgba(0,0,0,0.30)',
     '& input': {
       borderRadius: '7px',
+      fontSize: '16px',
       outline: 'none',
       height: '32px',
       border: '1px solid #4A4C4F',
@@ -153,6 +155,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     top: '18px',
     right: '16px',
     color: '#12D6D6',
+    fontSize: '16px',
   },
 
   hitsCounter: {
