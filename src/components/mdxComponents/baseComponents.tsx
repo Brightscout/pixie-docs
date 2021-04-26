@@ -30,6 +30,7 @@ import AnchorTag from './anchor';
 import CodeRenderer from './codeRenderer';
 import ListItem from './listItem';
 import HLink from './h-link';
+import CustomAlert from './custom-alert';
 
 const getChildren = (props) => props.children;
 const getLanguage = (props) => (props.className ? props.className.replace('language-', '') : 'bash');
@@ -85,6 +86,6 @@ export default {
   li: (props: any) => <ListItem {...props} />,
   img: (props: any) => <img {...props} className='doc-image' />,
   note: (props: any) => <Note {...props} />,
-  Alert,
+  Alert: (props: any) => <CustomAlert {...props} />,
 
 };
