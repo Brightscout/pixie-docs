@@ -17,7 +17,7 @@
 const mdxQuery = `
 {
 
-documentation: allSitePage(filter: {fields: {slug: {regex: "^pxl/"}}}) {
+documentation: allSitePage(filter: {fields: {slug: {regex: "^reference/"}}}) {
     edges {
       node {
         fields {

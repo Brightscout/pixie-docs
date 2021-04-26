@@ -21,7 +21,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { Alert } from '@material-ui/lab';
 import Code from 'components/mdxComponents/code';
 import Note from 'components/mdxComponents/note';
 import Pre from 'components/mdxComponents/pre';
