@@ -29,6 +29,7 @@ const LineNumber = withStyles((theme) => ({
     width: '20px',
     textAlign: 'right',
     paddingRight: '20px',
+    userSelect: 'none',
     color: theme.palette.type === 'light' ? '#ccc' : '#e0ebf7',
     fontFamily: '"Roboto Mono", Monospace',
   },
