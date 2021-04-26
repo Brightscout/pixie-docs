@@ -31,6 +31,9 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import logoImg from '../images/pixie-logo-header.svg';
 import slackIcon from './images/slack-icon.svg';
 import mailIcon from './images/mail-icon.svg';
+import github from './images/github-icon.svg';
+import twitter from './images/twitter-icon.svg';
+
 import SearchResultsDropdown from './search-results-dropdown';
 
 const useStyles = makeStyles((theme) => ({
@@ -42,6 +45,22 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       padding: '0 30px',
       paddingLeft: '5px',
+    },
+  },
+  socialIcons: {
+
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
+    },
+
+    '& a': {
+      display: 'inline-block',
+      padding: '5px 0 0',
+      margin: '0 0 0 33px',
+
+      '& img': {
+        width: '20px',
+      },
     },
   },
   middle: {
@@ -117,7 +136,8 @@ interface RenderProps {
 }
 
 const Header = ({
-  drawerOpen, setDrawerOpen,
+  drawerOpen,
+  setDrawerOpen,
   setSidebarOpen,
   sidebarOpen,
   onThemeTypeSwitch,
@@ -160,6 +180,14 @@ const Header = ({
               <Link to='/'>
                 <img className={classes.menuButton} src={logoImg} alt='logo' />
               </Link>
+              <div className={classes.socialIcons}>
+                <a href='https://github.com/pixie-labs/pixie'>
+                  <img src={github} alt='github' />
+                </a>
+                <a href='https://twitter.com/pixie_run'>
+                  <img src={twitter} alt='twitter' />
+                </a>
+              </div>
               <div className={classes.middle} />
               <div className={classes.buttons}>
                 <IconButton
@@ -174,7 +202,16 @@ const Header = ({
                 </IconButton>
                 <Hidden smDown implementation='css'>
                   <ClickAwayListener onClickAway={() => setOpenSupportMenu(false)}>
-                    <Button className={classes.menuItem} color='default' size='inherit' aria-controls='support-menu' aria-haspopup='true' onClick={() => setOpenSupportMenu((prev) => !prev)}>Support</Button>
+                    <Button
+                      className={classes.menuItem}
+                      color='default'
+                      size='inherit'
+                      aria-controls='support-menu'
+                      aria-haspopup='true'
+                      onClick={() => setOpenSupportMenu((prev) => !prev)}
+                    >
+                      Support
+                    </Button>
                   </ClickAwayListener>
                   <div className={classes.dropMenuRef}>
                     {openSupportMenu ? (
@@ -219,7 +256,11 @@ const Header = ({
                 </Hidden>
                 <SearchResultsDropdown />
                 <Hidden mdDown implementation='css'>
-                  <Button href={getReferrer()} size='small' color='secondary' variant='contained'>Back to Pixie</Button>
+                  <Button href={getReferrer()} size='small' color='secondary' variant='contained'>
+                    Back
+                    to
+                    Pixie
+                  </Button>
                 </Hidden>
               </div>
             </Toolbar>
