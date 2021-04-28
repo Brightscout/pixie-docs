@@ -17,12 +17,12 @@ The following is a list of protocols automatically traced by Pixie's no-instrume
 | MySQL         | Supported           |                                |
 | PostgreSQL    | Supported           |                                |
 | Cassandra     | Supported           |                                |
-| Redis         | Coming Soon         |                                |
+| Redis         | Supported           |                                |
 
 Additional protocols are under development.
 
 ## Encryption Libraries
 
 Pixie supports tracing of traffic encrypted with the following libraries:
-- [OpenSSL](https://www.openssl.org/)
+- [OpenSSL](https://www.openssl.org/) (versions 1.1.0, 1.1.1)
 - [Go TLS](https://golang.org/pkg/crypto/tls/)
