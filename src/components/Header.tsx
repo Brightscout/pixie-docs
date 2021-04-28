@@ -181,6 +181,9 @@ const Header = ({
                 <img className={classes.menuButton} src={logoImg} alt='logo' />
               </Link>
               <div className={classes.socialIcons}>
+                <a href='https://slackin.withpixie.ai/'>
+                  <img src={slackIcon} alt='slack' />
+                </a>
                 <a href='https://github.com/pixie-labs/pixie'>
                   <img src={github} alt='github' />
                 </a>
