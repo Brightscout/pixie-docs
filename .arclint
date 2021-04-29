@@ -55,6 +55,15 @@
         "(.*\\.(ts)$)",
         "(.*\\.(js)$)"
       ]
-    }
+    },
+    "license": {
+      "type": "script-and-regex",
+      "script-and-regex.script": "./tools/licenses/checker.py -a -f",
+      "script-and-regex.regex": "/^(?P<file>[^\n]+)(?P<error>:)((?P<line>\\d),(?P<char>\\d)\n<<<<<\n(?P<original>.*)=====\n(?P<replacement>.*)>>>>>\n)$/s",
+      "exclude": [
+        "(__phutil_library_init__.\\php$)",
+        "(__phutil_library_map__.\\php$)"
+      ]
+    } 
   }
 }

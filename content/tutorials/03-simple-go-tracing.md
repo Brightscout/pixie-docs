@@ -12,7 +12,7 @@ to instrument the source code with additional log statements, recompile, and red
 A simple overview of this functionality is show here:
 
 ::: div image-l
-<svg title='Dynamic Structured Loggging in Go' src='dynamic_logs.svg' />
+<svg title='Dynamic Structured Logging in Go' src='dynamic_logs.svg' />
 :::
 
 In a legacy systems a modify, compile, deploy cycle is required to get visibility into the binary

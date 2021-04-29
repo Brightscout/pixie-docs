@@ -23,7 +23,7 @@ Let's use Pixie to examine the DNS requests in your cluster and see the impact o
 
 - In the [Live UI](https://work.withpixie.ai/), select the `sotw/dns_external_fqdn_list` script. If you don't see any results, try increasing the timespan using the `start` value in the top right. Re-run the script with `cmd/ctrl+enter` or using the "RUN" button in the top right. 
 
-- This script outputs a list of all of the **external** fully qualified domain names from succesful DNS requests made in your cluster. Click on the "NUM_REQUESTS" column title to sort by number of requests per fully qualified domain name (FQDN). 
+- This script outputs a list of all of the **external** fully qualified domain names from successful DNS requests made in your cluster. Click on the "NUM_REQUESTS" column title to sort by number of requests per fully qualified domain name (FQDN). 
 
 *This script identifies external FQDNs by excluding known internal FQDNs. To do so, we assume that your cluster’s internal search domains include `.local` and `.internal` as suffixes. If not, open the script editor (`ctrl/cmd+e`) and modify lines 32-33. Re-run the script before proceeding.* 
 
