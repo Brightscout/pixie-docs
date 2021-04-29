@@ -110,8 +110,8 @@ const plugins = [
   {
     resolve: 'gatsby-plugin-segment-js',
     options: {
-      prodKey: 'hk77OdVPENwS28t1fTQasMP9PzNWhojt',
-      devKey: '3njXD6Bb4FFyS2FQJ6i40TwW5bmXyjiy',
+      prodKey: process.env.SEGMENT_PRODUCTION_WRITE_KEY,
+      devKey: process.env.SEGMENT_DEV_WRITE_KEY,
       trackPage: true,
     },
   },
