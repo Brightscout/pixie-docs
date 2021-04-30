@@ -719,7 +719,8 @@ export const pageQuery = graphql`
                 }
             }
         }
-        icons:allFile(filter: {relativeDirectory: {eq: "assets"}}) {
+              icons:allFile(filter: {relativeDirectory: {  regex: "/assets/" }}) {
+
             edges {
                 node {
                     absolutePath
