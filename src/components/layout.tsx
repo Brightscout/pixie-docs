@@ -38,7 +38,8 @@ interface PageItemProps {
   location: any,
   classes: any,
   lang: string,
-  globalUrlTree: any[]
+  globalUrlTree: any[],
+  availableLanguages: any[],
 }
 
 const Layout = withStyles((theme: Theme) => ({
