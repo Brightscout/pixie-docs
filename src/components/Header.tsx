@@ -176,10 +176,7 @@ const Header = ({
   const [openLanguageMenu, setOpenLanguageMenu] = React.useState(false);
 
   const classes = useStyles();
-  const getLanguageLabel = (languageId) => {
-    console.log(languageId);
-    return (languageId === 'en' ? 'English' : languages.find((l) => l.id === languageId).label);
-  };
+  const getLanguageLabel = (languageId) => (languageId === 'en' ? 'English' : languages.find((l) => l.id === languageId).label);
   const getReferrer = () => {
     if (typeof window === 'undefined') return 'https://pixielabs.ai';
     const ref = sessionStorage.getItem('referrer');
@@ -275,43 +272,46 @@ const Header = ({
                     ) : null}
                   </div>
                 </Hidden>
-                <Hidden smDown implementation='css'>
-                  <ClickAwayListener onClickAway={() => setOpenLanguageMenu(false)}>
-                    <Button
-                      className={classes.menuItem}
-                      color='default'
-                      size='inherit'
-                      aria-controls='support-menu'
-                      aria-haspopup='true'
-                      onClick={() => setOpenLanguageMenu((prev) => !prev)}
-                    >
-                      {getLanguageLabel(lang)}
-                      <span className={classes.dropIcon} />
-                    </Button>
-                  </ClickAwayListener>
-                  <div className={classes.dropMenuRef}>
-                    {openLanguageMenu ? (
-                      <div className={classes.langMenu}>
-                        {availableLanguages.map((l) => (
-                          <div
-                            key={l.lang}
-                            className={classes.langMenuItem}
-                            onClick={() => setOpenSupportMenu(false)}
-                          >
-                            <Link
-                              to={l.slug}
-                              target='_blank'
-                              rel='noopener noreferrer'
+                {availableLanguages
+                && (
+                  <Hidden smDown implementation='css'>
+                    <ClickAwayListener onClickAway={() => setOpenLanguageMenu(false)}>
+                      <Button
+                        className={classes.menuItem}
+                        color='default'
+                        size='inherit'
+                        aria-controls='support-menu'
+                        aria-haspopup='true'
+                        onClick={() => setOpenLanguageMenu((prev) => !prev)}
+                      >
+                        {getLanguageLabel(lang)}
+                        <span className={classes.dropIcon} />
+                      </Button>
+                    </ClickAwayListener>
+                    <div className={classes.dropMenuRef}>
+                      {openLanguageMenu ? (
+                        <div className={classes.langMenu}>
+                          {(availableLanguages || []).map((l) => (
+                            <div
+                              key={l.lang}
+                              className={classes.langMenuItem}
+                              onClick={() => setOpenSupportMenu(false)}
                             >
-                              {getLanguageLabel(l.lang)}
-                            </Link>
-                          </div>
-                        ))}
+                              <Link
+                                to={l.slug}
+                                target='_blank'
+                                rel='noopener noreferrer'
+                              >
+                                {getLanguageLabel(l.lang)}
+                              </Link>
+                            </div>
+                          ))}
 
-                      </div>
-                    ) : null}
-                  </div>
-                </Hidden>
+                        </div>
+                      ) : null}
+                    </div>
+                  </Hidden>
+                )}
                 <SearchResultsDropdown />
                 <Hidden mdDown implementation='css'>
                   <Button href={getReferrer()} size='small' color='secondary' variant='contained'>
